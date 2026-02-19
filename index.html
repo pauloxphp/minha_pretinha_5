@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio do Pug!</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe4e1;
+            color: #d02090;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 { font-size: 1.5rem; margin-bottom: 10px; }
+
+        #game-container {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        #pug {
+            width: 200px;
+            cursor: pointer;
+            transition: transform 0.1s;
+            user-select: none;
+        }
+
+        #pug:active { transform: scale(0.9); }
+
+        .hidden { display: none; }
+
+        #message {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #ff4757;
+        }
+
+        #prize-btn {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <h1>Clique no Pug para ganhar carinho!</h1>
+        <p>Cliques: <span id="score">0</span> / 10</p>
+        
+        <img id="pug" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueW94ZXB6Z3Z4Z3Z4Z3Z4Z3Z4Z3Z4Z3Z4Z3Z4Z3Z4Z3Z&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Pug">
+
+        <div id="win-area" class="hidden">
+            <p id="message">❤️ VOCÊ VENCEU! O PUG TE AMA! ❤️</p>
+            <button id="prize-btn" onclick="mostrarPremio()">Resgatar meu Prêmio</button>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        const target = 10;
+        const scoreEl = document.getElementById('score');
+        const pug = document.getElementById('pug');
+        const winArea = document.getElementById('win-area');
+
+        pug.addEventListener('click', () => {
+            if (score < target) {
+                score++;
+                scoreEl.textContent = score;
+
+                if (score === target) {
+                    winArea.classList.remove('hidden');
+                    pug.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcXNidmRwamR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHgmZXA9djFfZ2lmc19zZWFyY2gmcmlkPWdpcGh5LmdpZiZjdD1n/sj8r6B0U1X92E/giphy.gif"; // Pug com coração
+                }
+            }
+        });
+
+        function mostrarPremio() {
+            alert("Parabéns! Você ganhou um vale-beijo e um jantar! 🍕❤️");
+            // Aqui você pode redirecionar para um vídeo de vocês ou uma foto
+            // window.location.href = "URL_DA_FOTO_OU_VIDEO";
+        }
+    </script>
+</body>
+</html>
